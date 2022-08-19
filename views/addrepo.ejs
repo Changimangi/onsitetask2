@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="addrepo.css">
+</head>
+<body>
+    <form action="/addrepo" method="POST">
+        <div id="dropinput">
+            <input type="text" id="service" name="service" placeholder="Enter the service"><br>
+            <div id="dropcontent">
+                <p id="gmail">gmail</p>
+                <p id="whatsapp">whatsapp</p>
+                <p id="facebook">facebook</p>
+                <p id="twitter">twitter</p>
+            </div>
+        </div>
+        <input type="password" id="password" name="password" placeholder="Enter password"><br>
+        <button id="submitting" type="submit">Submit</button>
+        
+    </form>
+
+
+    <script>
+        var doc = document.getElementById("service");
+        document.getElementById("gmail").addEventListener("click",function(){
+            doc.value = "gmail"
+        })
+        document.getElementById("whatsapp").addEventListener("click",function(){
+            doc.value = "whatsapp"
+        })
+        document.getElementById("facebook").addEventListener("click",function(){
+            doc.value = "facebook"
+        })
+        document.getElementById("twitter").addEventListener("click",function(){
+            doc.value = "twitter"
+        })
+
+    </script>
+
+
+</body>
+</html>

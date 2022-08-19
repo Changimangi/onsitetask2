@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="welcome.css">
+</head>
+<body>
+    <p>Welcome <%=name%></p>
+    <div id="overall">
+    <button id="gotorepo">Go to password repository</button>
+    <button id="addrepo">Add password</button>
+    <button id="editrepo">Edit passwords</button>
+    <form action="/welcome" method="POST">
+    <button id="logout" name="logout" value="logout" type="submit">Logout</button>
+    </form>
+</div>
+    <script>
+        document.getElementById("gotorepo").addEventListener("click",function(){
+            location.href = "http://localhost:1270/gotorepo";
+        })
+        document.getElementById("addrepo").addEventListener("click",function(){
+            location.href = "http://localhost:1270/addrepo";
+        })
+        document.getElementById("editrepo").addEventListener("click",function(){
+            location.href = "http://localhost:1270/editrepo";
+        })
+        document.getElementById("logout").addEventListener("click",function(){
+            location.href = "http://localhost:1270/login";
+        })
+    </script>
+
+
+</body>
+</html>
