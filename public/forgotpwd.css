@@ -1,13 +1,14 @@
 html{
-    background-image: url("background6.jpg");
+    background-image: url("background1.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 #enclosure{
+    display: flex;
     margin-top: 15%;
     margin-left: 30%;
-    display: flex;
+   
     justify-content: center;
     background-image: url("background3.jpg");
     background-size: 35vw 45vh;

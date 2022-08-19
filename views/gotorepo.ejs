@@ -11,31 +11,11 @@
         <div id="dropinput">
             <input type="text" id="service" name="service" placeholder="Enter the service"><br>
             <div id="dropcontent">
-                <p id="gmail">gmail</p>
-                <p id="whatsapp">whatsapp</p>
-                <p id="facebook">facebook</p>
-                <p id="twitter">twitter</p>
+                <% detail.services.forEach(function(item){%>
+                    <button type="submit" name="service"  value=<%=item.s%>><%=item.s%></button>
+                    <%}); %>
             </div>
         </div>
-        <button id="submitting" type="submit">Submit</button>
-       <p id="repo"><%=detail%></p>
     </form>
-    <script>
-        var doc = document.getElementById("service");
-        document.getElementById("gmail").addEventListener("click",function(){
-            doc.value = "gmail"
-        })
-        document.getElementById("whatsapp").addEventListener("click",function(){
-            doc.value = "whatsapp"
-        })
-        document.getElementById("facebook").addEventListener("click",function(){
-            doc.value = "facebook"
-        })
-        document.getElementById("twitter").addEventListener("click",function(){
-            doc.value = "twitter"
-        })
-        
-
-    </script>
 </body>
 </html>

@@ -1,15 +1,16 @@
 html{
-    background-image: url("background.jpg");
+    background-image: url("background1.jpg");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     color:white;
-    font-family: sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 #enclosure{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 10%;
 }
 p{
     font-size: 6vmin;
@@ -24,15 +25,29 @@ input{
     width:25vw;
     height:6vh;
     margin:5px;
+    box-shadow: 0 0 10px black;
 }
 button{
-    border: 1px solid;
+    border: 1px solid ;
+    border-radius:10px;
     padding:10px;
-    background-color: aqua;
+    background-image: url("background3.jpg");
+    color:white;
+    font-size: 3vmin;
+    box-shadow: 0 0 10px black;
 }
 #innerenclosure{
     display:flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+}
+
+@media only screen and (max-width:850px){
+    #enclosure,form{
+        width:100%;
+    }
+    input{
+        width: 60%;
+    }
 }

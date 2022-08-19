@@ -47,10 +47,11 @@ var addedpass;
 var encrypted;
 var decrypted;
 var domain;
-var gotores = " ";
 var addres = " ";
 var editres = " ";
-var passcheck = "yes"
+var passcheck = "yes";
+var servicesoffered = {"services":[]};
+var passdetails = {"pass": " ","service": " ","date": " "};
 
 
 
@@ -205,7 +206,7 @@ app.post("/registration",function(req,res) {
 })
 
 app.get("/welcome",function(req,res){
-    gotores = " "
+    servicesoffered.gotores = " ";
     res.render("welcome",{name:userdetails[0]});
 })
 app.post("/welcome",function(req,res){
@@ -213,8 +214,9 @@ app.post("/welcome",function(req,res){
     res.redirect("/login")
 })
 app.get("/addrepo",function(req,res){
-    
     res.render("addrepo")
+    
+    
 })
 app.post("/addrepo",function(req,res){
     service = req.body.service;
@@ -226,7 +228,7 @@ app.post("/addrepo",function(req,res){
             return res.redirect("/welcome");
         }
         else{
-            con.query("insert into repo(username,service,pass) values('"+userdetails[0]+"','"+service+"','"+encrypted+"');",function(err,result){
+            con.query("insert into repo(username,service,pass,createddate) values('"+userdetails[0]+"','"+service+"','"+encrypted+"',now());",function(err,result){
                 if(err){
                     return console.log(err);
                 }
@@ -238,28 +240,55 @@ app.post("/addrepo",function(req,res){
     })
 })
 app.get("/gotorepo",function(req,res){
-    res.render("gotorepo",{detail:gotores});
-    gotores = " "
+    return new Promise(function(resolve,reject){
+        let k;
+    con.query("select * from repo where username = '"+userdetails[0]+"';",function(err,result){
+        for(let i = 0; i<result.length; i++){
+            k = result[i].service;
+            servicesoffered["services"].push({"s": k});
+        }
+        console.log(servicesoffered["services"]);
+        resolve(servicesoffered["services"][result.length-1]);
+    })}).then(function(){
+    res.render("gotorepo",{detail:servicesoffered});
+    servicesoffered["services"].splice(0,servicesoffered["services"].length);
+})
     
 })
 app.post("/gotorepo",function(req,res){
-    domain = req.body.service;
-    gotores = " "
+    domain = req.body.service[1];
+    console.log(domain);
     con.query("select * from repo where username = '"+userdetails[0]+"' && service = '"+domain+"';",function(err,result){
         if(result.length == 0){
-            alerting("service doesnt exist");
+            alerting("no service");
             return res.redirect("/gotorepo");
         }
-        else{
-            gotores = cryptr.decrypt(result[0].pass);
-
-            return res.redirect("/gotorepo");
-        }
-
+            passdetails["pass"] = cryptr.decrypt(result[0].pass);
+            passdetails["service"] = domain;
+            passdetails["date"] = result[0].createddate;
+            res.redirect("/passdisplay");
     })
 })
+app.get("/passdisplay",function(req,res){
+    res.render("passdisplay",{detail: passdetails})
+})
+app.post("/passdisplay",function(req,res){
+    res.redirect("/welcome")
+})
 app.get("/editrepo",function(req,res){
-    res.render("editrepo.ejs");
+    return new Promise(function(resolve,reject){
+        let k;
+    con.query("select * from repo where username = '"+userdetails[0]+"';",function(err,result){
+        for(let i = 0; i<result.length; i++){
+            k = result[i].service;
+            servicesoffered["services"].push({"s": k});
+        }
+        console.log(servicesoffered["services"]);
+        resolve(servicesoffered["services"][result.length-1]);
+    })}).then(function(){
+    res.render("editrepo",{detail:servicesoffered});
+    servicesoffered["services"].splice(0,servicesoffered["services"].length);
+})
 })
 app.post("/editrepo",function(req,res){
     let newpassforservice = req.body.password;
@@ -270,7 +299,7 @@ app.post("/editrepo",function(req,res){
             return res.redirect("/editrepo");
         }
         else{
-            con.query("update repo set pass = '"+cryptr.encrypt(newpassforservice)+"' where username = '"+ userdetails[0]+"' && service = '"+ newpassservice+"';",function(){
+            con.query("update repo set pass = '"+cryptr.encrypt(newpassforservice)+"', createddate = now() where username = '"+ userdetails[0]+"' && service = '"+ newpassservice+"';",function(){
                 alerting("details changed");
                 return res.redirect("/welcome");
             })
@@ -278,6 +307,7 @@ app.post("/editrepo",function(req,res){
         }
     })
 })
+
 
 
 

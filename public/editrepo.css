@@ -1,21 +1,22 @@
 html{
-    background-image: url("background.jpg");
-    background-size: cover;
+    background-image: url("background2.jpg");
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     font-weight: bold;
+    color:white;
     font-size: 3vmin;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 #dropcontent{
     display:none;
 }
 #dropinput:hover #dropcontent{
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     position:absolute;
     z-index: 2;
-    height: 40vh;
-    width: 10vw;
-    background-color: aquamarine;
-    text-align: center;
+    width: 25vw;
+    text-align: left;
     cursor: pointer;
 }
 form{
@@ -25,13 +26,36 @@ form{
     justify-content: center;
     margin-top:15%;
 }
-input{
+input,#service{
     height:6vh;
     width: 25vw;
     margin:5px;
 }
 button{
-    border: 1px solid;
-    background-color: aqua;
-    padding:10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: aliceblue;
+    background-color: blue;
+    box-shadow: 0 0 10px blue;
+    border: 1px solid blue;
+    width:25vw;
+    height:6vh;
+    margin-top: 5%;
+}
+.options{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: aliceblue;
+    background-color: rgb(241, 10, 114);
+    box-shadow: 0 0 10px rgb(241, 10, 114);
+    border: 1px solid rgb(241, 10, 114);
+    width:25vw;
+    height:6vh;
+    margin-top: 5%;
+}
+@media only screen and (max-width:850px){
+    form{
+        width:100%;
+    }
+    input{
+        width:60%;
+    }
 }
